@@ -4,6 +4,7 @@ import com.droissor.userapi.request.UserCreateRequest
 import com.droissor.userapi.request.toUserDto
 import com.droissor.userapi.response.UserResponse
 import com.droissor.userapi.service.UserService
+import com.droissor.userapi.vo.toUserResponse
 import javax.validation.Valid
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.http.MediaType
@@ -30,6 +31,6 @@ class UserController(
     )
     fun createUser(@Valid @RequestBody userUpdateRequest: UserCreateRequest): ResponseEntity<UserResponse> {
         val user = userService.createUser(userUpdateRequest.toUserDto())
-        return ResponseEntity.ok(UserResponse.fromUser(user))
+        return ResponseEntity.ok(user.toUserResponse())
     }
 }

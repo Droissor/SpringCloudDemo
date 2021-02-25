@@ -9,7 +9,7 @@ import javax.persistence.Table
 
 @Entity
 @Table(name = "user")
-data class User (
+data class UserEntity (
     @Id
     @GeneratedValue
     val id: Long = -1,
