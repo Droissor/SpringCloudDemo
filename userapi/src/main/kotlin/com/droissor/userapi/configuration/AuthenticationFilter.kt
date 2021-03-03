@@ -49,12 +49,10 @@ class AuthenticationFilter(
         val token = Jwts.builder()
             .setSubject(user.userId)
             .setExpiration(Date.from(Instant.now().plusSeconds(sessionExpirationSeconds)))
-            .signWith(SignatureAlgorithm.ES512, tokenSecret)
+            .signWith(SignatureAlgorithm.HS512, tokenSecret)
             .compact()
 
         response.addHeader("token", token)
         response.addHeader("userID", user.userId)
-
-        super.successfulAuthentication(request, response, chain, authResult)
     }
 }
