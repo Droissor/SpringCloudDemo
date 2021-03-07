@@ -1,4 +1,4 @@
-package com.droissor.userapi.configuration
+package com.droissor.userapi.configuration.filter
 
 import com.droissor.userapi.request.LoginRequest
 import com.droissor.userapi.service.UserService

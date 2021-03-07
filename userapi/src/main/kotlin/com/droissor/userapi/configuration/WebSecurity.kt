@@ -1,5 +1,6 @@
 package com.droissor.userapi.configuration
 
+import com.droissor.userapi.configuration.filter.AuthenticationFilter
 import com.droissor.userapi.service.UserService
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.context.annotation.Configuration
