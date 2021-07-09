@@ -7,6 +7,7 @@ import com.droissor.userapi.service.UserService
 import com.droissor.userapi.vo.toUserResponse
 import javax.validation.Valid
 import org.springframework.beans.factory.annotation.Value
+import org.springframework.core.env.Environment
 import org.springframework.http.MediaType
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.GetMapping
@@ -19,11 +20,16 @@ import org.springframework.web.bind.annotation.RestController
 @RequestMapping("/user")
 class UserController(
     @Value("\${eureka.instance.instance-id}") val instanceId: String,
+    val environment: Environment,
     val userService: UserService
 ) {
 
     @GetMapping("/info")
-    fun status() = ResponseEntity.ok("Response by $instanceId")
+    fun status() = ResponseEntity.ok(
+        "Response by $instanceId, token default expirationSeconds=${
+            environment.getProperty(EXPIRATION_SECONDS_PROP_NAME)
+        }"
+    )
 
     @PostMapping(
         consumes = [MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE],
@@ -32,5 +38,9 @@ class UserController(
     fun createUser(@Valid @RequestBody userUpdateRequest: UserCreateRequest): ResponseEntity<UserResponse> {
         val user = userService.createUser(userUpdateRequest.toUserDto())
         return ResponseEntity.ok(user.toUserResponse())
+    }
+
+    companion object {
+        const val EXPIRATION_SECONDS_PROP_NAME = "session.expiration.seconds"
     }
 }
