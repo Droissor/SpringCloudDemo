@@ -1,6 +1,6 @@
 package com.droissor.userapi.service
 
-import com.droissor.userapi.entity.UserEntity
+import com.droissor.userapi.client.AlbumClient
 import com.droissor.userapi.repository.UserRepository
 import com.droissor.userapi.vo.UserDto
 import com.droissor.userapi.vo.toUser
@@ -11,8 +11,8 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 import org.springframework.stereotype.Service
 
 @Service
-class UserService(val userRepository: UserRepository, val bCryptPasswordEncoder: BCryptPasswordEncoder) :
-    UserDetailsService {
+class UserService(val userRepository: UserRepository, val bCryptPasswordEncoder: BCryptPasswordEncoder, val albumClient: AlbumClient) :
+        UserDetailsService {
 
     fun createUser(userDto: UserDto): UserDto {
         val user = userDto.toUser { password -> bCryptPasswordEncoder.encode(password) }
@@ -20,6 +20,14 @@ class UserService(val userRepository: UserRepository, val bCryptPasswordEncoder:
     }
 
     fun getUserDetailByEmail(email: String): UserDto = UserDto.fromUser(userRepository.findByEmail(email))
+
+    fun getUserDetailById(userId: String): UserDto {
+        val userDto = UserDto.fromUser(userRepository.findByUserId(userId))
+
+        userDto.albums = albumClient.getUserAlbums(userId)
+
+        return userDto
+    }
 
     override fun loadUserByUsername(username: String): UserDetails {
         val user = userRepository.findByEmail(username)
