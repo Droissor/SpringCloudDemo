@@ -4,6 +4,8 @@ import com.droissor.userapi.client.AlbumClient
 import com.droissor.userapi.repository.UserRepository
 import com.droissor.userapi.vo.UserDto
 import com.droissor.userapi.vo.toUser
+import org.slf4j.Logger
+import org.slf4j.LoggerFactory
 import org.springframework.security.core.userdetails.User
 import org.springframework.security.core.userdetails.UserDetails
 import org.springframework.security.core.userdetails.UserDetailsService
@@ -24,7 +26,9 @@ class UserService(val userRepository: UserRepository, val bCryptPasswordEncoder:
     fun getUserDetailById(userId: String): UserDto {
         val userDto = UserDto.fromUser(userRepository.findByUserId(userId))
 
+        logger.info("m=getUserDetailById, msg={}", "Calling albumAPI")
         userDto.albums = albumClient.getUserAlbums(userId)
+        logger.info("m=getUserDetailById, msg={}", "Success call")
 
         return userDto
     }
@@ -32,5 +36,9 @@ class UserService(val userRepository: UserRepository, val bCryptPasswordEncoder:
     override fun loadUserByUsername(username: String): UserDetails {
         val user = userRepository.findByEmail(username)
         return User(user.email, user.encryptedPassword, true, true, true, true, listOf())
+    }
+
+    companion object {
+        val logger: Logger = LoggerFactory.getLogger(this::class.java)
     }
 }
