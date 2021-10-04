@@ -1,10 +1,10 @@
-package com.droissor.photoapi
+package com.droissor.albumapi
 
 import org.junit.jupiter.api.Test
 import org.springframework.boot.test.context.SpringBootTest
 
 @SpringBootTest
-class PhotoapiApplicationTests {
+class AlbumApiApplicationTests {
 
 	@Test
 	fun contextLoads() {

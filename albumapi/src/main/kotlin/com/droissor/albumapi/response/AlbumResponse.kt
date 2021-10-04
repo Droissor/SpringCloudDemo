@@ -1,6 +1,6 @@
-package com.droissor.photoapi.entity
+package com.droissor.albumapi.response
 
-class AlbumEntity (
+data class AlbumResponse(
         val albumId: String,
         val userId: String,
         val name: String,

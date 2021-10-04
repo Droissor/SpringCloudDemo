@@ -1,12 +1,11 @@
-package com.droissor.photoapi.controller
+package com.droissor.albumapi.controller
 
-import com.droissor.photoapi.response.AlbumResponse
-import com.droissor.photoapi.service.AlbumService
-import com.droissor.photoapi.vo.toAlbumResponse
+import com.droissor.albumapi.response.AlbumResponse
+import com.droissor.albumapi.service.AlbumService
+import com.droissor.albumapi.vo.toAlbumResponse
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import org.springframework.http.MediaType
-import org.springframework.stereotype.Controller
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.RequestMapping

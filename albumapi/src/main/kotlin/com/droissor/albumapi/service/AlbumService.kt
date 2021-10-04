@@ -1,7 +1,7 @@
-package com.droissor.photoapi.service
+package com.droissor.albumapi.service
 
-import com.droissor.photoapi.entity.AlbumEntity
-import com.droissor.photoapi.vo.AlbumDto
+import com.droissor.albumapi.entity.AlbumEntity
+import com.droissor.albumapi.vo.AlbumDto
 import org.springframework.stereotype.Service
 
 @Service

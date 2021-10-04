@@ -1,7 +1,7 @@
-package com.droissor.photoapi.vo
+package com.droissor.albumapi.vo
 
-import com.droissor.photoapi.entity.AlbumEntity
-import com.droissor.photoapi.response.AlbumResponse
+import com.droissor.albumapi.entity.AlbumEntity
+import com.droissor.albumapi.response.AlbumResponse
 
 data class AlbumDto(
         val albumId: String,
